@@ -55,13 +55,57 @@
 
         static void LoadDataFromFile()
         {
+            if (File.Exists(filePath) == false)
+            {
+                return;
+            }
 
+            string[] lines = File.ReadAllLines(filePath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+
+                if (line != "")
+                {
+                    string[] parts = line.Split(';');
+                    string roomNumber = parts[0];
+                    string type = parts[1];
+                    int capacity = int.Parse(parts[2]);
+                    double pricePerNight = double.Parse(parts[3]);
+
+                    bool occupied = false;
+                    if (parts[4] == "true")
+                    {
+                        occupied = true;
+                    }
+                    else
+                    {
+                        occupied = false;
+                    }
+
+                    string guestName = parts[5];
+
+                    Room r = new Room(roomNumber, type, capacity, pricePerNight, occupied, guestName);
+                    hotelRooms.Add(r);
+                }
+            }
         }
-
         static void SaveDataToFile()
         {
+             
+                    string[] linesToSave = new string[hotelRooms.Count];
 
+                    for (int i = 0; i < hotelRooms.Count; i++)
+                    {
+                        linesToSave[i] = hotelRooms[i].ToFileRow();
+                    }
+
+                   
+                    File.WriteAllLines(filePath, linesToSave);
+                
         }
+
         //meli tezi sa za teb
         static void BookRoom()
         {
