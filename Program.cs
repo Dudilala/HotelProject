@@ -109,27 +109,28 @@
         //meli tezi sa za teb
         static void BookRoom()
         {
-            Console.WriteLine("---Функция за резервиране на стая---");
+            Console.WriteLine("---Резервиране на стая---");
             Console.ReadKey();
         }
 
         static void FreeRoom()
         {
-            Console.WriteLine("---Функция за освобождаване на стая---");
+            Console.WriteLine("---Освобождаване на стая---");
             Console.ReadKey();
         }
 
         static void CheckAvailabilityAndPrices()
         {
-            Console.WriteLine("---Функция за проверка на наличността---");
+            Console.WriteLine("---Проверка на наличността---");
             Console.ReadKey();
         }
 
         static void ShowOccupiedRooms()
         {
-            Console.WriteLine("---Функция за справка за заетите стаи---");
+            Console.WriteLine("---Справка за заетите стаи---");
             Console.ReadKey();
         }
+
 
     }
  }
