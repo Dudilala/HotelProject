@@ -173,6 +173,21 @@
         static void CheckAvailabilityAndPrices()
         {
             Console.WriteLine("---Проверка на наличността---");
+
+            int availableRooms = 0;
+
+            for (int i = 0; i < hotelRooms.Count; i++)
+            {
+                if (hotelRooms[i].occupied == false)
+                {
+                    hotelRooms[i].PrintRoomInfo();
+                    availableRooms = availableRooms + 1;
+                }
+            }
+            if (availableRooms == 0)
+            {
+                Console.WriteLine("В момента няма свободни стаи в хотела.");
+            }
             Console.ReadKey();
         }
 
