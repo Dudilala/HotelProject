@@ -109,7 +109,34 @@
         //meli tezi sa za teb
         static void BookRoom()
         {
-            Console.WriteLine("---Резервиране на стая---");
+            Console.WriteLine("--- РЕЗЕРВИРАНЕ НА СТАЯ ---");
+            Console.Write("Въведете номер на стая за резервация: ");
+            string number = Console.ReadLine();
+
+            for(int i = 0; i < hotelRooms.Count; i++)
+            {
+                if (hotelRooms[i].roomNumber == number)
+                {
+                    if (hotelRooms[i].occupied == true)
+                    {
+                        Console.WriteLine("Съжaляваме, тази стая вече е заета от друг гост!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Въведете име на госта: ");
+                        string name = Console.ReadLine();
+
+                        hotelRooms[i].occupied = true;
+                        hotelRooms[i].guestName = name;
+
+                        SaveDataToFile();
+                        Console.WriteLine("Стаята беше резервирана успешно! ");
+                    }
+                    Console.ReadKey();
+                    return;
+                }
+            }
+            Console.WriteLine("Грешка: Стая с такъв номер не съществува!");
             Console.ReadKey();
         }
 
