@@ -193,7 +193,21 @@
 
         static void ShowOccupiedRooms()
         {
-            Console.WriteLine("---Справка за заетите стаи---");
+            Console.WriteLine("---Справка за заетите стаи и техните гости---");
+            int occupiedRoomsCount = 0;
+
+            for(int i = 0; i < hotelRooms.Count; i++)
+            {
+                if (hotelRooms[i].occupied == true)
+                {
+                    hotelRooms[i].PrintRoomInfo();
+                    occupiedRoomsCount = occupiedRoomsCount + 1;
+                }
+            }
+            if(occupiedRoomsCount == 0)
+            {
+                Console.WriteLine("В момента няма заети стаи в хотела.");
+            }
             Console.ReadKey();
         }
 
