@@ -143,6 +143,30 @@
         static void FreeRoom()
         {
             Console.WriteLine("---Освобождаване на стая---");
+            Console.Write("Въведете номер на стая за освобождаване: ");
+            string number = Console.ReadLine();
+
+            for (int i = 0; i < hotelRooms.Count; i++)
+            {
+                if (hotelRooms[i].roomNumber == number)
+                {
+                    if (hotelRooms[i].occupied == false)
+                    {
+                        Console.WriteLine("Стаята е свободна!");
+                    }
+                    else
+                    {
+                        hotelRooms[i].occupied = false;
+                        hotelRooms[i].guestName = "";
+
+                        SaveDataToFile();
+                        Console.WriteLine("Стаята беше освободена успешно!");
+                    }
+                    Console.ReadKey();
+                    return;
+                }
+            }
+            Console.WriteLine("Грешка: Стая с такъв номер не съществува!");
             Console.ReadKey();
         }
 
