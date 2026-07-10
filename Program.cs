@@ -55,9 +55,17 @@
 
         static void LoadDataFromFile()
         {
+       
             if (File.Exists(filePath) == false)
             {
-                return;
+                string[] defaultRooms = new string[]
+                {
+                    "101;Единична;1;50;false;none",
+                    "102;Двойна;2;80;false;none",
+                    "103;Апартамент;4;150;false;none",
+                    "104;Студио;3;110;false;none"
+                };
+                File.WriteAllLines(filePath, defaultRooms);
             }
 
             string[] lines = File.ReadAllLines(filePath);
@@ -79,10 +87,6 @@
                     {
                         occupied = true;
                     }
-                    else
-                    {
-                        occupied = false;
-                    }
 
                     string guestName = parts[5];
 
@@ -91,39 +95,36 @@
                 }
             }
         }
+
         static void SaveDataToFile()
         {
-             
-                    string[] linesToSave = new string[hotelRooms.Count];
+            string[] linesToSave = new string[hotelRooms.Count];
 
-                    for (int i = 0; i < hotelRooms.Count; i++)
-                    {
-                        linesToSave[i] = hotelRooms[i].ToFileRow();
-                    }
+            for (int i = 0; i < hotelRooms.Count; i++)
+            {
+                linesToSave[i] = hotelRooms[i].ToFileRow();
+            }
 
-                   
-                    File.WriteAllLines(filePath, linesToSave);
-                
+            File.WriteAllLines(filePath, linesToSave);
         }
 
-        //meli tezi sa za teb
         static void BookRoom()
         {
             Console.WriteLine("--- РЕЗЕРВИРАНЕ НА СТАЯ ---");
             Console.Write("Въведете номер на стая за резервация: ");
             string number = Console.ReadLine();
 
-            for(int i = 0; i < hotelRooms.Count; i++)
+            for (int i = 0; i < hotelRooms.Count; i++)
             {
                 if (hotelRooms[i].roomNumber == number)
                 {
                     if (hotelRooms[i].occupied == true)
                     {
-                        Console.WriteLine("Съжaляваме, тази стая вече е заета от друг гост!");
+                        Console.WriteLine("Съжаляваме, тази стая вече е заета от друг гост!");
                     }
                     else
                     {
-                        Console.WriteLine("Въведете име на госта: ");
+                        Console.Write("Въведете име на госта: ");
                         string name = Console.ReadLine();
 
                         hotelRooms[i].occupied = true;
@@ -142,7 +143,7 @@
 
         static void FreeRoom()
         {
-            Console.WriteLine("---Освобождаване на стая---");
+            Console.WriteLine("--- Освобождаване на стая ---");
             Console.Write("Въведете номер на стая за освобождаване: ");
             string number = Console.ReadLine();
 
@@ -172,8 +173,7 @@
 
         static void CheckAvailabilityAndPrices()
         {
-            Console.WriteLine("---Проверка на наличността---");
-
+            Console.WriteLine("--- Проверка на наличността ---");
             int availableRooms = 0;
 
             for (int i = 0; i < hotelRooms.Count; i++)
@@ -193,10 +193,10 @@
 
         static void ShowOccupiedRooms()
         {
-            Console.WriteLine("---Справка за заетите стаи и техните гости---");
+            Console.WriteLine("--- Справка за заетите стаи и техните гости ---");
             int occupiedRoomsCount = 0;
 
-            for(int i = 0; i < hotelRooms.Count; i++)
+            for (int i = 0; i < hotelRooms.Count; i++)
             {
                 if (hotelRooms[i].occupied == true)
                 {
@@ -204,7 +204,7 @@
                     occupiedRoomsCount = occupiedRoomsCount + 1;
                 }
             }
-            if(occupiedRoomsCount == 0)
+            if (occupiedRoomsCount == 0)
             {
                 Console.WriteLine("В момента няма заети стаи в хотела.");
             }
